@@ -82,7 +82,7 @@ public class Order implements Serializable {
 	}
 
 	public static boolean isOrderADrink(Order o) {
-		return o.getOrderType().endsWith("Drink");
+		return o.getOrderType().endsWith("DRINK");
 	}
 
 	@Override

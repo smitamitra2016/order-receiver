@@ -34,7 +34,7 @@ public class UDPRoute extends RouteBuilder {
 				.to("seda:prepareOrders?multipleConsumers=true");
 		from("seda:prepareOrders?multipleConsumers=true&concurrentConsumers=15")
 				.to("bean:prepareOrder?method=prepareOrder").multicast().choice().when(predicate)
-				.to(drinksUrl + "&operation=save").otherwise().to(foodUrl + "operation=save").end()
+				.to(drinksUrl + "&operation=save").otherwise().to(foodUrl + "&operation=save").end()
 				.to("seda:serveOrder");
 	}
 

@@ -15,7 +15,7 @@ public class PrepareOrder {
 		Thread.currentThread().sleep(45000);
 		order.setPreparedAt(new Date());
 		System.out.println("Order " + order.getOrder() + " for table " + order.getTable() + " ordered came in kitchen at "
-				+ now + " prepared at " + order.getPreparedAt() + "   "+Thread.currentThread().getId());
+				+ now + " preparation completed at " + order.getPreparedAt());
 		return order;
 	}
 }

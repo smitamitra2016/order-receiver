@@ -10,7 +10,7 @@ public class Order implements Serializable {
 
 	private Object _id;
 	private String order;
-	private String isDrink;
+	private String orderType;
 	private int count;
 	private int table;
 	private Date timeOfOrder;
@@ -40,12 +40,12 @@ public class Order implements Serializable {
 		this.order = order;
 	}
 
-	public String getIsDrink() {
-		return isDrink;
+	public String getOrderType() {
+		return orderType;
 	}
 
-	public void setIsDrink(String isDrink) {
-		this.isDrink = isDrink;
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
 	}
 
 	public int getCount() {
@@ -72,22 +72,22 @@ public class Order implements Serializable {
 		this.timeOfOrder = timeOfOrder;
 	}
 
-	public Order(String order, String isDrink, int count, int table, Date timeOfOrder) {
+	public Order(String order, String orderType, int count, int table, Date timeOfOrder) {
 		super();
 		this.order = order;
-		this.isDrink = isDrink;
+		this.orderType = orderType;
 		this.count = count;
 		this.table = table;
 		this.timeOfOrder = timeOfOrder;
 	}
 
 	public static boolean isOrderADrink(Order o) {
-		return o.getIsDrink().equals("Y");
+		return o.getOrderType().endsWith("Drink");
 	}
 
 	@Override
 	public String toString() {
-		return "Order [order=" + order + ", isDrink=" + isDrink + ", count=" + count + ", table=" + table
+		return "Order [order=" + order + ", orderType=" + orderType + ", count=" + count + ", table=" + table
 				+ ", timeOfOrder=" + timeOfOrder + "]";
 	}
 

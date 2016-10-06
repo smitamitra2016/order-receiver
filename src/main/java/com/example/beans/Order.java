@@ -3,10 +3,13 @@ package com.example.beans;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
+import com.mongodb.BasicDBObject;
+
 @Component
-public class Order implements Serializable {
+public class Order extends BasicDBObject implements Serializable {
 
 	private Object _id;
 	private String order;
@@ -15,7 +18,16 @@ public class Order implements Serializable {
 	private int table;
 	private Date timeOfOrder;
 	private Date preparedAt;
-	
+	private String timeToPrepare;
+
+	public String getTimeToPrepare() {
+		return timeToPrepare;
+	}
+
+	public void setTimeToPrepare(String timeToPrepare) {
+		this.timeToPrepare = timeToPrepare;
+	}
+
 	public Object get_id() {
 		return _id;
 	}
@@ -72,17 +84,26 @@ public class Order implements Serializable {
 		this.timeOfOrder = timeOfOrder;
 	}
 
-	public Order(String order, String orderType, int count, int table, Date timeOfOrder) {
+	public Order(String order, String orderType, String timeToPrepare, int count, int table, Date timeOfOrder) {
 		super();
 		this.order = order;
 		this.orderType = orderType;
 		this.count = count;
 		this.table = table;
 		this.timeOfOrder = timeOfOrder;
+		this.timeToPrepare = timeToPrepare;
 	}
 
 	public static boolean isOrderADrink(Order o) {
 		return o.getOrderType().endsWith("DRINK");
+	}
+
+	public static String typeOfDrink(Order o) {
+		return StringUtils.substring(o.getOrderType(), 0, 1);
+	}
+
+	public String getOrderDetails() {
+		return timeOfOrder + ":" + order + ":" + timeToPrepare;
 	}
 
 	@Override

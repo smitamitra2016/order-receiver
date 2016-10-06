@@ -15,8 +15,8 @@ public class OrderSplitter {
 	
 	public Order splitBody(String body) {
 		log.info(body);
-		String[] parts = body.split(":");// order:isDrink:count:table
-		Order order = new Order(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), new Date());
+		String[] parts = body.split(":");// order:isDrink:timeToPrepareInMins:count:table
+		Order order = new Order(parts[0], parts[1], parts[2],Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), new Date());
 		order.set_id(order.getTimeOfOrder());
 		return order;
 	}

@@ -14,6 +14,7 @@ import org.springframework.context.annotation.PropertySource;
 
 import com.example.helper.PrepareOrder;
 import com.example.routes.UDPRoute;
+import com.example.routes.UnprocessedRoute;
 import com.example.splitter.OrderSplitter;
 import com.mongodb.Mongo;
 
@@ -46,7 +47,6 @@ public class Application {
 	@SuppressWarnings("deprecation")
 	@Bean
 	public Mongo mongoBean() {
-		int port = -1;
 		Mongo mongo = null;
 		if (StringUtils.isNumeric(mongoPort)) {
 			mongo = new Mongo(mongoHost, Integer.parseInt(mongoPort));
@@ -57,13 +57,19 @@ public class Application {
 	@Bean
 	public SpringCamelContext camelContext(ApplicationContext applicationContext) throws Exception {
 		SpringCamelContext camelContext = new SpringCamelContext(applicationContext);
-		camelContext.addRoutes(routeBuilder());
+		camelContext.addRoutes(UDProuteBuilder());
+		camelContext.addRoutes(unprocessedRouteBuilder());
 		return camelContext;
 	}
 
 	@Bean
-	public RouteBuilder routeBuilder() {
+	public RouteBuilder UDProuteBuilder() {
 		return new UDPRoute();
+	}
+	
+	@Bean
+	public RouteBuilder unprocessedRouteBuilder() {
+		return new UnprocessedRoute();
 	}
 
 	public static void main(String[] args) {

@@ -12,9 +12,5 @@ public class UdpOrderApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-	
-	public void testPrepareOrder(){
-		
-	}
 
 }

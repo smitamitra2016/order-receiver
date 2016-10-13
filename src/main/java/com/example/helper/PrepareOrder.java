@@ -3,7 +3,7 @@ package com.example.helper;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.stereotype.Component;
 
 import com.example.beans.Order;
@@ -15,9 +15,9 @@ public class PrepareOrder {
 	public Order prepareOrder(Order order) throws InterruptedException {
 		Date now = new Date();
 		System.out.println("Order " + order.getOrder() + " for table " + order.getTable() + " came to kitchen " + now);
-		if (StringUtils.isNumericSpace(order.getTimeToPrepare())) {
-			int prepTime = Integer.parseInt(order.getTimeToPrepare());
-			Thread.currentThread().sleep(prepTime * 60 * 1000);
+		if (NumberUtils.isNumber(order.getTimeToPrepare())) {
+			float prepTime = Float.parseFloat(order.getTimeToPrepare());
+			Thread.currentThread().sleep((long) (prepTime * 60 * 1000));
 			order.setPreparedAt(new Date());
 		}
 		System.out.println("Order " + order.getOrder() + " for table " + order.getTable()

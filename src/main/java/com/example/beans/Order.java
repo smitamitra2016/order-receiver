@@ -84,6 +84,10 @@ public class Order extends BasicDBObject implements Serializable {
 		this.timeOfOrder = timeOfOrder;
 	}
 
+	public Order(){
+		super();
+	}
+	
 	public Order(String order, String orderType, String timeToPrepare, int count, int table, Date timeOfOrder) {
 		super();
 		this.order = order;
@@ -94,12 +98,12 @@ public class Order extends BasicDBObject implements Serializable {
 		this.timeToPrepare = timeToPrepare;
 	}
 
-	public static boolean isOrderADrink(Order o) {
-		return o.getOrderType().endsWith("DRINK");
+	public boolean isOrderADrink() {
+		return getOrderType().endsWith("DRINK");
 	}
 
-	public static String typeOfDrink(Order o) {
-		return StringUtils.substring(o.getOrderType(), 0, 1);
+	public String typeOfDrink() {
+		return StringUtils.substring(orderType, 0, 1);
 	}
 
 	public String getOrderDetails() {
